@@ -1,0 +1,95 @@
+// Custom Exception
+class InvalidProductException extends Exception {
+    public InvalidProductException(String message) {
+        super(message);
+    }
+}
+
+// Product Class
+class Product {
+    private int productId;
+    private String productName;
+    private double price;
+    private int quantity;
+
+    // Constructor with all fields
+    public Product(int productId, String productName, double price, int quantity) throws InvalidProductException {
+        if (price < 0 || quantity < 0)
+            throw new InvalidProductException("Price or Quantity cannot be negative!");
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    // Constructor with default price and quantity
+    public Product(int productId, String productName) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = 0;
+        this.quantity = 0;
+    }
+
+  
+    public void addProduct(int productId, String productName, double price, int quantity) throws InvalidProductException {
+        if (price < 0 || quantity < 0)
+            throw new InvalidProductException("Price or Quantity cannot be negative!");
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public void addProduct(String productName, double price) throws InvalidProductException {
+        if (price < 0)
+            throw new InvalidProductException("Price cannot be negative!");
+        this.productName = productName;
+        this.price = price;
+        this.quantity = 1; 
+    }
+
+    public void addProduct(String productName, double price, int quantity) throws InvalidProductException {
+        if (price < 0 || quantity < 0)
+            throw new InvalidProductException("Price or Quantity cannot be negative!");
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public void displayProduct() {
+        System.out.println("ProductID: " + productId + ", Name: " + productName +
+                ", Price: " + price + ", Quantity: " + quantity);
+    }
+}
+
+// ProductManager Class
+public class ProductManager {
+    public static void main(String[] args) {
+        try {
+            Product p1 = new Product(101, "Laptop", 50000, 5);
+            Product p2 = new Product(102, "Mouse");
+
+            p2.addProduct("Gaming Mouse", 1500, 10);
+            Product p3 = new Product(103, "Keyboard");
+            p3.addProduct("Keyboard", 2500);
+
+            p1.displayProduct();
+            p2.displayProduct();
+            p3.displayProduct();
+
+            // Demonstrate exce.
+            Product p4 = new Product(104, "Monitor", -10000, 2);
+
+        } catch (InvalidProductException e) {
+            System.out.println("Exception Occurred: " + e.getMessage());
+        }
+    }
+}
+
+
+--------------------------(Out-Put)------------------------------
+
+ProductID: 101, Name: Laptop, Price: 50000.0, Quantity: 5
+ProductID: 102, Name: Gaming Mouse, Price: 1500.0, Quantity: 10
+ProductID: 103, Name: Keyboard, Price: 2500.0, Quantity: 1
+Exception Occurred: Price or Quantity cannot be negative!

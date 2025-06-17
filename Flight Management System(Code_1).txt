@@ -1,0 +1,73 @@
+abstract class Flight {
+    protected String flightNumber; 
+    protected String origin;
+    protected String destination;
+    protected double baseFare;
+
+    public Flight(String flightNumber, String origin, String destination, double baseFare) {
+        this.flightNumber = flightNumber;
+        this.origin = origin;
+        this.destination = destination;
+        this.baseFare = baseFare;
+    }
+
+    public abstract double calculateFare();
+
+    public void displayDetails() {
+        System.out.println("Flight Number: " + flightNumber);
+        System.out.println("Origin: " + origin);
+        System.out.println("Destination: " + destination);
+        System.out.println("Base Fare: " + baseFare);
+        System.out.println("Total Fare: " + calculateFare());
+        System.out.println("--------------------------------");
+    }
+}
+
+class DomesticFlight extends Flight {
+    private static final double domesticTax = 0.10;
+
+    public DomesticFlight(String flightNumber, String origin, String destination, double baseFare) {
+        super(flightNumber, origin, destination, baseFare);
+    }
+
+    @Override
+    public double calculateFare() {
+        return baseFare + (baseFare * domesticTax);
+    }
+}
+
+class InternationalFlight extends Flight {
+    private static final double internationalTax = 0.20;
+    private double immigrationFee;
+
+    public InternationalFlight(String flightNumber, String origin, String destination, double baseFare, double immigrationFee) {
+        super(flightNumber, origin, destination, baseFare);
+        this.immigrationFee = immigrationFee;
+    }
+
+    @Override
+    public double calculateFare() {
+        return baseFare + (baseFare * internationalTax) + immigrationFee;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Flight[] flights = new Flight[4];
+
+        flights[0] = new DomesticFlight("AI101", "Delhi", "Mumbai", 5000);
+        flights[1] = new InternationalFlight("AI202", "Delhi", "New York", 30000, 5000);
+        flights[2] = new DomesticFlight("AI303", "Bangalore", "Hyderabad", 4000);
+        flights[3] = new InternationalFlight("AI404", "Mumbai", "London", 25000, 4000);
+
+        double totalFare = 0;
+        for (Flight flight : flights) {
+            flight.displayDetails();
+            totalFare += flight.calculateFare();
+        }
+
+        System.out.println("Total Fare for All Flights: " + totalFare);
+    }
+}
+
+
