@@ -71,3 +71,32 @@ public class Main {
 }
 
 
+
+-----------(Out-Put)--------------
+
+Flight Number: AI101
+Origin: Delhi
+Destination: Mumbai
+Base Fare: 5000.0
+Total Fare: 5500.0
+--------------------------------
+Flight Number: AI202
+Origin: Delhi
+Destination: New York
+Base Fare: 30000.0
+Total Fare: 41000.0
+--------------------------------
+Flight Number: AI303
+Origin: Bangalore
+Destination: Hyderabad
+Base Fare: 4000.0
+Total Fare: 4400.0
+--------------------------------
+Flight Number: AI404
+Origin: Mumbai
+Destination: London
+Base Fare: 25000.0
+Total Fare: 34000.0
+--------------------------------
+Total Fare for All Flights: 84900.0
+
